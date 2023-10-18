@@ -8,6 +8,8 @@ use Auth;
 use Validator , Hash;
 use App\Models\Admin;
 use Image;
+use App\Http\Requests\AdminRequest;
+use App\Models\AdminRole;
 
 class AdminController extends Controller
 {
@@ -16,8 +18,6 @@ class AdminController extends Controller
     }
 
     public function login(Request $request){
-
-
         if ($request->isMethod('post')) {
             $rules = [
                 'email' => 'required|email',
@@ -28,8 +28,17 @@ class AdminController extends Controller
                 'password.required' => 'Password is required'
             ];
             $this->validate($request , $rules , $customMessages);
-
           if (Auth::guard('admin')->attempt(['email' => $request->email , 'password' => $request->password])) {
+
+            //remeber me with cookies
+            if (isset($request->remember) && !empty($request->remember)) {
+               setcookie('email' ,$request->email , time()+3600 );
+               setcookie('password' ,$request->password , time()+3600 );
+            } else {
+                setcookie('email' , "");
+                setcookie('password' , "");
+            }
+
             return redirect()->route('admin.dashboard')->with('success' , 'Admin login successfully');
           }
           else{
@@ -87,7 +96,6 @@ class AdminController extends Controller
         } else {
            return "false";
         }
-
     }
 
     public function adminDetails(Request $request){
@@ -103,8 +111,6 @@ class AdminController extends Controller
             //     'new_password.required' => 'New Password is required'
             // ];
             $this->validate($request , $rules );
-
-
             if($request->hasFile('image')){
                 $image = $request->file('image');
                 $image_name = $image->getClientOriginalName();
@@ -122,6 +128,169 @@ class AdminController extends Controller
         } else{
             return view('admin.update_admin_details');
         }
+    }
+    public function index(){
+        $subadmins= Admin::whereNot('type','admin')->latest('id')->get();
+        return view('admin.subadmins.index')->with(compact('subadmins'));
+    }
+
+    public function create(){
+
+        return view('admin.subadmins.create');
+    }
+
+    public function store(AdminRequest $request)
+    {
+
+        $data = [];
+        if($request->hasFile('image')){
+            $image = $request->file('image');
+            $image_name = $image->getClientOriginalName();
+            if (!is_dir(storage_path("app/public/images/admin_image"))) {
+                mkdir(storage_path("app/public/images/admin_image"), 0775, true);
+            }
+            Image::make($image)->save(storage_path("app/public/images/admin_image/".$image_name));
+            $data['image']= $image_name;
+        }
+
+        $data['name'] = $request->name;
+        $data['email'] = $request->email;
+        $data['password']= bcrypt($request->password);
+        $data['mobile'] = $request->mobile;
+        $data['type'] = $request->type;
+        $data['status'] =1;
+
+        Admin::create($data);
+        return redirect()->route('admin.subadmins.index')->with('success' , 'Admin created successfully');
+    }
+
+    public function edit($id){
+
+        $subadmin = Admin::find($id);
+        return view('admin.subadmins.edit')->with(compact('subadmin'));
+    }
+
+    public function update(AdminRequest $request , $id)
+    {
+
+        $data = [];
+        if($request->hasFile('image')){
+            $image = $request->file('image');
+            $image_name = $image->getClientOriginalName();
+            if (!is_dir(storage_path("app/public/images/admin_image"))) {
+                mkdir(storage_path("app/public/images/admin_image"), 0775, true);
+            }
+            Image::make($image)->save(storage_path("app/public/images/admin_image/".$image_name));
+            $data['image']= $image_name;
+        }
+
+        $data['name'] = $request->name;
+        $data['email'] = $request->email;
+        $data['password']= bcrypt($request->password);
+        $data['mobile'] = $request->mobile;
+        $data['type'] = $request->type;
+        $data['status'] =1;
+
+        Admin::whereId($id)->update($data);
+        return redirect()->route('admin.subadmins.index')->with('success' , 'Admin updated successfully');
+    }
+
+    public function updateSubadminStatus(Request $request)
+    {
+        if ($request->ajax()) {
+            if ($request->status=='Active') {
+                $status = 0;
+            } else {
+                $status = 1;
+            }
+            Admin::where('id' , $request->subadmin_id)->update(['status' => $status]);
+            return response()->json(['status' => $status , 'subadmin_id' => $request->subadmin_id]);
+        }
+    }
+
+    public function delete($id)
+    {
+        Admin::whereId($id)->delete();
+         return redirect()->route('admin.subadmins.index')->with('success' , 'Subadmin deleted successfully');
+    }
+
+
+    // Update subadmins roles
+    public function editSubadminRoles(Request $request ,$id){
+            $subadmin  = Admin::find($id);
+            $get_admin_roles = AdminRole::where('subadmin_id' , $id)->get();
+        return view('admin.subadmins.update_roles')->with(compact('subadmin' , 'get_admin_roles'));
 
     }
+
+
+    // Update subadmins roles
+    public function updateSubadminRoles(Request $request ,$id){
+
+        $existing_admin_roles = AdminRole::where('subadmin_id' , $id)->delete();
+
+        $data = $request->all();
+        // dd($data);
+        foreach ($data as $key => $value) {
+
+            if (isset($value['view'])) {
+                $view = $value['view'];
+            }
+            else{
+                $view= 0;
+            }
+
+            if (isset($value['edit'])) {
+                $edit = $value['edit'];
+            }
+            else{
+                $edit= 0;
+            }
+
+            if (isset($value['full'])) {
+                $full = $value['full'];
+            }
+            else{
+                $full= 0;
+            }
+
+        }
+
+
+        // if (isset($request->cms_page['view'])) {
+        //   $cms_page_view = $request->cms_page['view'];
+        // }
+        // else{
+        //     $cms_page_view = 0;
+        // }
+
+        // if (isset($request->cms_page['edit'])) {
+        //     $cms_page_edit = $request->cms_page['edit'];
+        // }
+        // else{
+        //       $cms_page_edit = 0;
+        // }
+
+        // if (isset($request->cms_page['full'])) {
+        //     $cms_page_full = $request->cms_page['full'];
+        // }
+        // else{
+        //       $cms_page_full = 0;
+        // }
+
+         $admin_roles =  AdminRole::create([
+            'subadmin_id' => $id,
+            'module' => $key,
+            'view_access' => $view,
+            'edit_access' => $edit,
+            'full_access' => $full,
+          ]);
+          if ($admin_roles) {
+            return redirect()->back()->with('success' , 'Subadmin role updated successfully');
+          } else {
+            return redirect()->back()->with('error' , 'Something went wrong');
+          }
+
+    }
+
 }

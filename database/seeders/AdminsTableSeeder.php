@@ -16,13 +16,27 @@ class AdminsTableSeeder extends Seeder
     {
         $password = Hash::make('admin@123');
         $adminRecords = [
-                'name' => 'Admin',
-                'type' => 'admin',
+            [
+                'id'=> 4,
+                'name' => 'Ramanpreet',
+                'type' => 'subadmin',
                 'mobile' => '1234567891',
-                'email' => 'admin@gmail.com',
+                'email' => 'ramanpreet@gmail.com',
                 'password' => $password,
                 'image' => '',
                 'status' => '1',
+            ],
+            [
+                'id'=> 5,
+                'name' => 'Simrandeep',
+                'type' => 'subadmin',
+                'mobile' => '1234567891',
+                'email' => 'simrandeep@gmail.com',
+                'password' => $password,
+                'image' => '',
+                'status' => '1',
+            ],
+
         ];
         Admin::insert($adminRecords);
     }

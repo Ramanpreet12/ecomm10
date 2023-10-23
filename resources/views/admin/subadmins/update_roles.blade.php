@@ -95,65 +95,116 @@
                                                 <tbody>
                                                     @foreach ($get_admin_roles as $admin_role)
                                                         @if ($admin_role->module == 'cms_page')
+                                                            @php
+                                                                if ($admin_role->view_access == 1) {
+                                                                    $viewCmsPage = 'checked';
+                                                                } else {
+                                                                    $viewCmsPage = '';
+                                                                }
+                                                                if ($admin_role->edit_access == 1) {
+                                                                    $editCmsPage = 'checked';
+                                                                } else {
+                                                                    $editCmsPage = '';
+                                                                }
+                                                                if ($admin_role->full_access == 1) {
+                                                                    $fullCmsPage = 'checked';
+                                                                } else {
+                                                                    $fullCmsPage = '';
+                                                                }
+
+                                                            @endphp
+                                                        @endif
+
+                                                        @if ($admin_role->module == 'categories')
                                                         @php
                                                             if ($admin_role->view_access == 1) {
-                                                                $viewCmsPage = "checked";
-                                                            }
-                                                            else{
-                                                                $viewCmsPage = "";
+                                                                $viewCategories = 'checked';
+                                                            } else {
+                                                                $viewCategories = '';
                                                             }
                                                             if ($admin_role->edit_access == 1) {
-                                                                $editCmsPage = "checked";
-                                                            }
-                                                            else{
-                                                                $editCmsPage = "";
+                                                                $editCategories = 'checked';
+                                                            } else {
+                                                                $editCategories = '';
                                                             }
                                                             if ($admin_role->full_access == 1) {
-                                                                $fullCmsPage = "checked";
-                                                            }
-                                                            else{
-                                                                $fullCmsPage = "";
+                                                                $fullCategories = 'checked';
+                                                            } else {
+                                                                $fullCategories = '';
                                                             }
 
                                                         @endphp
-
-                                                        @endif
-
+                                                    @endif
                                                     @endforeach
+                                                        <tr class="text-center">
+                                                            <td>1</td>
+                                                            <td>CMS Page</td>
+                                                            <td>
+                                                                <div class="custom-control custom-checkbox text-center">
+                                                                    <input class="custom-control-input" type="checkbox"
+                                                                        id="customCheckbox1" value="1"
+                                                                        name="cms_page[view]"
+                                                                        @if (isset($viewCmsPage)) {{ $viewCmsPage }} @endif>
+                                                                    <label for="customCheckbox1"
+                                                                        class="custom-control-label"></label>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="custom-control custom-checkbox text-center">
+                                                                    <input class="custom-control-input" type="checkbox"
+                                                                        id="customCheckbox2" value="1"
+                                                                        name="cms_page[edit]"
+                                                                        @if (isset($editCmsPage)) {{ $editCmsPage }} @endif>
+                                                                    <label for="customCheckbox2"
+                                                                        class="custom-control-label"></label>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="custom-control custom-checkbox text-center">
+                                                                    <input class="custom-control-input" type="checkbox"
+                                                                        id="customCheckbox3" value="1"
+                                                                        name="cms_page[full]"
+                                                                        @if (isset($fullCmsPage)) {{ $fullCmsPage }} @endif>
+                                                                    <label for="customCheckbox3"
+                                                                        class="custom-control-label"></label>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
 
-                                                    <tr class="text-center">
-                                                        <td>1</td>
-                                                        <td>CMS Page</td>
-                                                        <td>
-                                                            <div class="custom-control custom-checkbox text-center">
-                                                                <input class="custom-control-input" type="checkbox"
-                                                                    id="customCheckbox1" value="1"
-                                                                    name="cms_page[view]" @if (isset($viewCmsPage)) {{ $viewCmsPage }} @endif>
-                                                                <label for="customCheckbox1"
-                                                                    class="custom-control-label"></label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="custom-control custom-checkbox text-center">
-                                                                <input class="custom-control-input" type="checkbox"
-                                                                    id="customCheckbox2" value="1"
-                                                                    name="cms_page[edit]" @if (isset($editCmsPage)) {{ $editCmsPage }} @endif>
-                                                                <label for="customCheckbox2"
-                                                                    class="custom-control-label"></label>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="custom-control custom-checkbox text-center">
-                                                                <input class="custom-control-input" type="checkbox"
-                                                                    id="customCheckbox3" value="1"
-                                                                    name="cms_page[full]" @if (isset($fullCmsPage)) {{ $fullCmsPage }} @endif>
-                                                                <label for="customCheckbox3"
-                                                                    class="custom-control-label"></label>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-
-
+                                                        <tr class="text-center">
+                                                            <td>2</td>
+                                                            <td>Categories</td>
+                                                            <td>
+                                                                <div class="custom-control custom-checkbox text-center">
+                                                                    <input class="custom-control-input" type="checkbox"
+                                                                        id="categoryViewCheckbox" value="1"
+                                                                        name="categories[view]"
+                                                                        @if (isset($viewCategories)) {{ $viewCategories }} @endif>
+                                                                    <label for="categoryViewCheckbox"
+                                                                        class="custom-control-label"></label>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="custom-control custom-checkbox text-center">
+                                                                    <input class="custom-control-input" type="checkbox"
+                                                                        id="categoryEditCheckbox" value="1"
+                                                                        name="categories[edit]"
+                                                                        @if (isset($editCategories)) {{ $editCategories }} @endif>
+                                                                    <label for="categoryEditCheckbox"
+                                                                        class="custom-control-label"></label>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="custom-control custom-checkbox text-center">
+                                                                    <input class="custom-control-input" type="checkbox"
+                                                                        id="categoryFullCheckbox" value="1"
+                                                                        name="categories[full]"
+                                                                        @if (isset($fullCategories)) {{ $fullCategories }} @endif>
+                                                                    <label for="categoryFullCheckbox"
+                                                                        class="custom-control-label"></label>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
 
                                                 </tbody>
                                             </table>

@@ -57,7 +57,9 @@
                                     <div class="form-group row">
                                         <label for="name" class="col-sm-2 col-form-label"></label>
                                         {{-- <div class="col-sm-10"> --}}
-                                            @error('name') <span class="text-danger">{{ $message }}</span> @enderror
+                                        @error('name')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                         {{-- </div> --}}
                                     </div>
 
@@ -66,7 +68,9 @@
                                     <div class="form-group row">
                                         <label for="email" class="col-sm-2 col-form-label"></label>
                                         {{-- <div class="col-sm-10"> --}}
-                                            @error('email') <span class="text-danger">{{ $message }}</span> @enderror
+                                        @error('email')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                         {{-- </div> --}}
                                     </div>
 
@@ -88,7 +92,9 @@
                                     <div class="form-group row">
                                         <label for="mobile" class="col-sm-2 col-form-label"></label>
                                         {{-- <div class="col-sm-10"> --}}
-                                            @error('mobile') <span class="text-danger">{{ $message }}</span> @enderror
+                                        @error('mobile')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                         {{-- </div> --}}
                                     </div>
 
@@ -104,7 +110,9 @@
                                     <div class="form-group row">
                                         <label for="type" class="col-sm-2 col-form-label"></label>
                                         {{-- <div class="col-sm-10"> --}}
-                                            @error('type') <span class="text-danger">{{ $message }}</span> @enderror
+                                        @error('type')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                         {{-- </div> --}}
                                     </div>
 
@@ -125,6 +133,9 @@
 
                                     </div>
 
+
+
+                                    @if (!empty($subadmin->image))
                                     <div class="form-group row">
                                         <label for="image" class="col-sm-2 col-form-label"></label>
                                         <div class="input-group col-sm-10">
@@ -138,8 +149,16 @@
                                             <img src="{{ asset('storage/images/admin_image/' . $subadmin->image) }}"
                                                 alt="" srcset="" height="200px" width="200px">
                                         </div>
-
                                     </div>
+                                    @else
+                                    <div class="form-group row">
+                                        <label for="image" class="col-sm-2 col-form-label"></label>
+                                        <div class="input-group col-sm-10">
+                                            <img src="{{ asset('admin/img/dummy_image.webp') }}"
+                                                al  t="" srcset="" height="140px" width="150px">
+                                        </div>
+                                    </div>
+                                    @endif
                                 </div>
                                 <!-- /.card-body -->
                                 <div class="card-footer">

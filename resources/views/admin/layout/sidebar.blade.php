@@ -11,8 +11,14 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="{{ asset('storage/images/admin_image/' . Auth::guard('admin')->user()->image) }}"
-                    class="img-circle elevation-2" alt="User Image">
+                @if (!empty(Auth::guard('admin')->user()->image))
+                <img class="img-fluid img-circle"
+                src="{{ asset('storage/images/admin_image/' . Auth::guard('admin')->user()->image) }}"
+                alt="User profile picture">
+                @else
+                <img class="profile-user-img img-fluid img-circle"
+                src="{{ asset('admin/img/dummy_image.webp') }}" alt="User profile picture">
+                @endif
             </div>
             <div class="info">
                 <a href="{{ route('admin.dashboard') }}" class="d-block">{{ Auth::guard('admin')->user()->name }}</a>
@@ -100,6 +106,38 @@
                         </ul>
                     </li>
                 @endif
+
+                <li class="nav-item @if (Route::currentRouteName() == 'admin.categories.index' || Route::currentRouteName() == 'admin.products.index') menu-is-opening menu-open @endif">
+                    <a href="#" class="nav-link @if (Route::currentRouteName() == 'admin.categories.index' || Route::currentRouteName() == 'admin.products.index') active @endif">
+                        {{-- <i class="nav-icon fas fa-copy"></i> --}}
+                        <i class="nav-icon fa-solid fa-gear"></i>
+                        <p>
+                            Catalogue
+                            <i class="fas fa-angle-left right"></i>
+                            {{-- <span class="badge badge-info right">6</span> --}}
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview @if (Route::currentRouteName() == 'admin.categories.index' || Route::currentRouteName() == 'admin.products.index') menu-open @endif">
+                        <li class="nav-item">
+                            <a href="{{ route('admin.categories.index') }}"
+                                class="nav-link @if (Route::currentRouteName() == 'admin.categories.index') active @endif">
+                                {{-- <i class="far fa-circle nav-icon"></i> --}}
+                                <i class="nav-icon fa-solid fa-circle"></i>
+                                <p>Categories </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.products.index') }}"
+                                class="nav-link  @if (Route::currentRouteName() == 'admin.products.index') active @endif">
+                                <i class="nav-icon fa-solid fa-circle"></i>
+                                <p>Products</p>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+
+
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

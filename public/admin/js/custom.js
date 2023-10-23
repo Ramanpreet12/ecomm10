@@ -5,7 +5,12 @@
 
 $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip();
+    $('.select2').select2()
 
+    //Initialize Select2 Elements
+    // $('.select2bs4').select2({
+    //   theme: 'bootstrap4'
+    // })
 
 
     $.ajaxSetup({
@@ -57,8 +62,6 @@ $(document).ready(function () {
     });
 
 
-
-
      // update CMS page status
      $(document).on("click", ".updateCmsPageStatus", function () {
         var status = $(this).find(".status").attr("page_status");
@@ -86,6 +89,9 @@ $(document).ready(function () {
 
         var module = $(this).attr("module");
         var module_id = $(this).attr("module_id");
+        // console.log('module :' +module , 'id:'+ module_id , 'route will be : '+'http://127.0.0.1:8000/admin' + module+'/delete/'+module_id);
+        // var route = window.location.href=module+'/delete/'+module_id;
+        // console.log(route);
 
         Swal.fire({
             title: 'Are you sure?',
@@ -102,9 +108,33 @@ $(document).ready(function () {
                 'Your file has been deleted.',
                 'success'
               )
-              window.location.href=module+'/delete/'+module_id;
+              window.location.href='http://127.0.0.1:8000/admin/'+module+'/delete/'+module_id;
             }
           });
 
-    })
+    });
+
+
+
+    // update Category page status
+    $(document).on("click", ".updateCategoryStatus", function () {
+        var status = $(this).find(".status").attr("category_status");
+
+        var category_id = $(this).attr('category_id');
+        $.ajax({
+            type: 'post',
+            url: 'update-category-status',
+            data: { status: status, category_id: category_id },
+            success: function (resp) {
+                if (resp['status'] == 1) {
+                    $('#category-' + category_id).html('<i class="fa-solid fa-toggle-on status"  data-toggle="tooltip" title="Active" style="color:#007bff"  category_status="Active"></i>');
+                } else if (resp['status'] == 0) {
+                    $('#category-' + category_id).html('<i class="fa-solid fa-toggle-off status"  data-toggle="tooltip" title="Inactive" style="color:grey"  category_status="Inactive"></i>');
+                }
+            }, error: function () {
+                console.log('error' + resp);
+            }
+        });
+    });
+
 });

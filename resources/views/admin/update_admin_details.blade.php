@@ -31,9 +31,19 @@
                         <div class="card card-primary card-outline">
                             <div class="card-body box-profile">
                                 <div class="text-center">
+                                    @if (!empty(Auth::guard('admin')->user()->image))
                                     <img class="profile-user-img img-fluid img-circle"
-                                        src="{{ asset('storage/images/admin_image/' . Auth::guard('admin')->user()->image) }}"
-                                        alt="User profile picture">
+                                    src="{{ asset('storage/images/admin_image/' . Auth::guard('admin')->user()->image) }}"
+                                    alt="User profile picture">
+                                    @else
+                                    <img class="profile-user-img img-fluid img-circle"
+                                    src="{{ asset('admin/img/dummy_image.webp') }}" alt="User profile picture">
+                                    @endif
+
+
+
+
+
                                 </div>
 
                                 <h3 class="profile-username text-center">{{ Auth::guard('admin')->user()->name }}</h3>

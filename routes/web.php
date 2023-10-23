@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CmsPageController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +44,15 @@ Route::prefix('admin')->name('admin.')->namespace('App\Http\Controllers\Admin')-
         Route::get('subadmins/roles/{id}' , 'AdminController@editSubadminRoles')->name('subadmins.roles');
         Route::post('subadmins/update/roles/{id}' , 'AdminController@updateSubadminRoles')->name('subadmins.update.roles');
 
+        // Categories
+        Route::resource('categories', CategoryController::class);
+        Route::post('update-category-status' , 'CategoryController@updateCategoryStatus')->name('update-category-status');
+        Route::get('category/delete/{id}' , 'CategoryController@delete');
+        // delete category image from folder and db
+        Route::get('category-image/delete/{id}' , 'CategoryController@deleteImage');
+
+
+        Route::resource('products',ProductController::class);
     });
 
 

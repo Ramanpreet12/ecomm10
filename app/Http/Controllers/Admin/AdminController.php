@@ -227,7 +227,7 @@ class AdminController extends Controller
     // Update subadmins roles
     public function updateSubadminRoles(Request $request ,$id){
 
-        $existing_admin_roles = AdminRole::where('subadmin_id' , $id)->delete();
+        // $existing_admin_roles = AdminRole::where('subadmin_id' , $id)->delete();
 
         $data = $request->all();
         // dd($data);
@@ -278,13 +278,23 @@ class AdminController extends Controller
         //       $cms_page_full = 0;
         // }
 
-         $admin_roles =  AdminRole::create([
-            'subadmin_id' => $id,
-            'module' => $key,
-            'view_access' => $view,
-            'edit_access' => $edit,
-            'full_access' => $full,
-          ]);
+        //  $admin_roles =  AdminRole::create([
+        //     'subadmin_id' => $id,
+        //     'module' => $key,
+        //     'view_access' => $view,
+        //     'edit_access' => $edit,
+        //     'full_access' => $full,
+        //   ]);
+
+
+        $admin_roles= new AdminRole;
+        $admin_roles->subadmin_id = $id;
+        $admin_roles->module = $key;
+        $admin_roles->view_access = $view;
+        $admin_roles->edit_access = $edit;
+        $admin_roles->full_access = $full;
+        $admin_roles->save();
+
           if ($admin_roles) {
             return redirect()->back()->with('success' , 'Subadmin role updated successfully');
           } else {

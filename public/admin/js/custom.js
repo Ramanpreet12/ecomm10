@@ -83,6 +83,9 @@ $(document).ready(function () {
         });
     });
 
+
+
+
     //delete with sweet alert
 
         $(document).on("click", ".confirmDelete", function () {
@@ -130,6 +133,28 @@ $(document).ready(function () {
                     $('#category-' + category_id).html('<i class="fa-solid fa-toggle-on status"  data-toggle="tooltip" title="Active" style="color:#007bff"  category_status="Active"></i>');
                 } else if (resp['status'] == 0) {
                     $('#category-' + category_id).html('<i class="fa-solid fa-toggle-off status"  data-toggle="tooltip" title="Inactive" style="color:grey"  category_status="Inactive"></i>');
+                }
+            }, error: function () {
+                console.log('error' + resp);
+            }
+        });
+    });
+
+
+     // update Products status
+     $(document).on("click", ".updateProductStatus", function () {
+        var status = $(this).find(".status").attr("product_status");
+
+        var product_id = $(this).attr('product_id');
+        $.ajax({
+            type: 'post',
+            url: 'update-product-status',
+            data: { status: status, product_id: product_id },
+            success: function (resp) {
+                if (resp['status'] == 1) {
+                    $('#product-' + product_id).html('<i class="fa-solid fa-toggle-on status"  data-toggle="tooltip" title="Active" style="color:#007bff"  product_status="Active"></i>');
+                } else if (resp['status'] == 0) {
+                    $('#product-' + product_id).html('<i class="fa-solid fa-toggle-off status"  data-toggle="tooltip" title="Inactive" style="color:grey"  product_status="Inactive"></i>');
                 }
             }, error: function () {
                 console.log('error' + resp);

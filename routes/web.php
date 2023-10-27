@@ -51,8 +51,14 @@ Route::prefix('admin')->name('admin.')->namespace('App\Http\Controllers\Admin')-
         // delete category image from folder and db
         Route::get('category-image/delete/{id}' , 'CategoryController@deleteImage');
 
+        // products
+        Route::resource('products', ProductController::class);
+        Route::post('update-product-status' , 'ProductController@updateProductStatus')->name('update-product-status');
+        Route::get('product/delete/{id}' , 'ProductController@delete');
+            // delete product video from folder and db
+            Route::get('product-video/delete/{id}' , 'ProductController@deleteVideo');
 
-        Route::resource('products',ProductController::class);
+
     });
 
 

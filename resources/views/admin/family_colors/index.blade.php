@@ -1,9 +1,8 @@
 @extends('admin.layout.layout')
 @section('content')
     <div class="content-wrapper">
-        @include('admin.includes.page_header' , ['page_name' => 'Cms Pages' , 'breadcrumb_link' =>  route('admin.dashboard')  , 'breadcrumb_item' =>'cms-pages' ])
-        <!-- Main content -->
-
+        @include('admin.includes.page_header' , ['page_name' => 'Family Colors' ,
+        'breadcrumb_link' =>  route('admin.dashboard')  , 'breadcrumb_item' =>'family-colors' ])
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -11,84 +10,88 @@
                         @include('alert_messages')
                         <div class="card">
 
-                            @if ($pagesModule['edit_access']==1 ||  $pagesModule['full_access']==1)
+                            {{-- @if ($pagesModule['edit_access']==1 ||  $pagesModule['full_access']==1) --}}
                             <div class="card-header">
-                                <a class="card-title float-right" href="{{ route('admin.cms-page.create') }}">
-                                    <button class="btn btn-primary"> Add Cms Page</button>
+                                <a class="card-title float-right" href="{{ route('admin.family-colors.create') }}">
+                                    <button class="btn btn-primary"> Add Family Color</button>
                                 </a>
                             </div>
-                            @endif
+                            {{-- @endif --}}
                             <!-- /.card-header -->
                             <div class="card-body">
                                 <table id="cms_page_table" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
                                             <th>S.no.</th>
-                                            <th>Title</th>
-                                            @if ($pagesModule['edit_access']==1 || $pagesModule['full_access']==1)
+                                            <th>Color Name</th>
+                                            <th>Color Code</th>
+                                            {{-- @if ($pagesModule['edit_access']==1 || $pagesModule['full_access']==1) --}}
                                             <th>Status</th>
-                                            @endif
+                                            {{-- @endif --}}
                                             <th>Created At </th>
                                             <th>Updated At </th>
-                                            @if ($pagesModule['edit_access']==1 || $pagesModule['full_access']==1)
+                                            {{-- @if ($pagesModule['edit_access']==1 || $pagesModule['full_access']==1) --}}
                                             <th>Action</th>
-                                            @endif
+                                            {{-- @endif --}}
 
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($cms_pages as $cms_page)
+                                        @foreach ($family_colors as $family_color)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $cms_page->title }}</td>
+                                                <td>{{ $family_color->color_name }}</td>
+                                                <td>{{ $family_color->color_code }}</td>
                                                  {{-- restrict this feature is subadmin has no permissions --}}
-                                                 @if ($pagesModule['edit_access']==1 || $pagesModule['full_access']==1)
+                                                 {{-- @if ($pagesModule['edit_access']==1 || $pagesModule['full_access']==1) --}}
                                                 <td>
 
-                                                    @if ($cms_page->status == 1)
-                                                        <a href="javascript:void(0)" class="updateCmsPageStatus"
-                                                            style="color:none; !important" id="page-{{ $cms_page->id }}"
-                                                            page_id={{ $cms_page->id }} status="Active">
+                                                    @if ($family_color->status == 1)
+                                                        <a href="javascript:void(0)" class="updateFamilyColorStatus"
+                                                            style="color:none; !important" id="family_colors-{{ $family_color->id }}"
+                                                            family_colors_id={{ $family_color->id }} status="Active">
                                                             <i class="fa-solid fa-toggle-on status" data-toggle="tooltip"
-                                                                title="Active" page_status="Active"></i>
+                                                                title="Active" family_colors_status="Active"></i>
                                                         </a>
-                                                    @elseif($cms_page->status == 0)
-                                                        <a href="javascript:void(0)" class="updateCmsPageStatus"
-                                                            style="color: grey;  !important" id="page-{{ $cms_page->id }}"
-                                                            page_id={{ $cms_page->id }} status="Inactive">
+                                                    @elseif($family_color->status == 0)
+                                                        <a href="javascript:void(0)" class="updateFamilyColorStatus"
+                                                            style="color: grey;  !important" id="family_colors-{{ $family_color->id }}"
+                                                            family_colors_id={{ $family_color->id }} status="Inactive">
                                                             <i class="fa-solid fa-toggle-off status" data-toggle="tooltip"
-                                                                title="Inactive" page_status="Inactive"></i>
+                                                                title="Inactive" family_colors_status="Inactive"></i>
                                                         </a>
 
                                                     @endif
                                                 </td>
-                                                @endif
-                                                <td> {{ date_time_format($cms_page->created_at) }} </td>
-                                                <td> {{ date_time_format($cms_page->updated_at) }} </td>
-                                                @if ($pagesModule['edit_access']==1 ||  $pagesModule['full_access']==1)
+                                                {{-- @endif --}}
+                                                <td> {{ date_time_format($family_color->created_at) }}
+                                                </td>
+                                                <td>  {{ date_time_format($family_color->updated_at) }}
+                                                </td>
+                                                {{-- @if ($pagesModule['edit_access']==1 ||  $pagesModule['full_access']==1) --}}
                                                 <td>
                                                     <div class="d-flex justify-content-center align-items-center">
-                                                        @if ($pagesModule['edit_access']==1 ||  $pagesModule['full_access']==1 )
-                                                        <a href="{{ route('admin.cms-page.edit', $cms_page->id) }}"
+                                                        {{-- @if ($pagesModule['edit_access']==1 ||  $pagesModule['full_access']==1 ) --}}
+                                                        <a href="{{ route('admin.family-colors.edit', $family_color->id) }}"
                                                             data-toggle="tooltip" title="Edit">
                                                             <button class="btn btn-primary"><i
                                                                     class="fa-solid fa-pen"></i></button>
                                                         </a>
-                                                        @endif
-                                                        @if ($pagesModule['full_access']==1)
+                                                        {{-- @endif --}}
+                                                        {{-- @if ($pagesModule['full_access']==1) --}}
 
                                                         <a
-                                                         {{-- href="{{ url('admin/cms-page/delete/' . $cms_page->id) }}" --}}
+                                                         {{-- href="{{ url('admin/family-colors/delete/' . $family_color->id) }}" --}}
                                                             data-toggle="tooltip" title="Delete">
                                                             <button class="btn btn-danger ml-2 confirmDelete"
-                                                                data-toggle="tooltip" title="Delete" module="cms-page"
-                                                                module_id={{ $cms_page->id }}><i
+                                                                data-toggle="tooltip" title="Delete" module="family-colors"
+                                                                module_id={{ $family_color->id }}><i
                                                                     class="fa-solid fa-trash-can"></i></button>
                                                         </a>
-                                                        @endif
+                                                        {{-- @endif --}}
                                                     </div>
                                                 </td>
-                                                @endif
+                                                {{-- @endif --}}
                                             </tr>
                                         @endforeach
 

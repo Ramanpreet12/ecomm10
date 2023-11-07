@@ -5,14 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CmsPage extends Model
+class FamilyColor extends Model
 {
     use HasFactory;
     protected $guarded = [];
-
-
-    // protected $casts = [
-    //     'title' =>'encrypted',
-    //     'url' =>'encrypted',
-    // ];
 }

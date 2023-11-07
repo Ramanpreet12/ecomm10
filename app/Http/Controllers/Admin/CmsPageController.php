@@ -125,8 +125,6 @@ class CmsPageController extends Controller
             }
             CmsPage::where('id' , $request->page_id)->update(['status' => $status]);
             return response()->json(['status' => $status , 'page_id' => $request->page_id]);
-
-
         }
     }
 

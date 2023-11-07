@@ -42,6 +42,7 @@ class CategoryController extends Controller
 
     public function updateCategoryStatus(Request $request)
     {
+        // dd($request);
         if ($request->ajax()) {
             if ($request->status=='Active') {
                 $status = 0;
@@ -169,7 +170,7 @@ class CategoryController extends Controller
     public function deleteImage($id){
         // get image path
         $image_path = storage_path("app/public/front/images/category/");
-
+        // dd($image_path);
         //get image from table
         $get_image =  Category::whereId($id)->select('category_image')->first();
         $image =  $image_path.$get_image->category_image ;

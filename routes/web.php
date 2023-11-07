@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CmsPageController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\FamilyColorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,8 +60,12 @@ Route::prefix('admin')->name('admin.')->namespace('App\Http\Controllers\Admin')-
             Route::get('product-video/delete/{id}' , 'ProductController@deleteVideo');
 
 
+            // products family colors
+        Route::resource('family-colors', FamilyColorController::class);
+        Route::post('update-family-colors-status' , 'FamilyColorController@updateFamilyColorStatus')->name('update-family-colors-status');
+        Route::get('family-colors/delete/{id}' , 'FamilyColorController@delete');
+
+
     });
-
-
 
 });

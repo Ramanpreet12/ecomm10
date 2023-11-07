@@ -1,22 +1,7 @@
 @extends('admin.layout.layout')
 @section('content')
     <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1>Admins</h1>
-                    </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-                            <li class="breadcrumb-item active">admins</li>
-                        </ol>
-                    </div>
-                </div>
-            </div><!-- /.container-fluid -->
-        </section>
+@include('admin.includes.page_header' , ['page_name' => 'Admins' , 'breadcrumb_link' =>  route('admin.dashboard')  , 'breadcrumb_item' =>'admins' ])
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
@@ -70,9 +55,9 @@
                                                         </a>
                                                     @endif
                                                 </td>
-                                                <td> {{ \Carbon\Carbon::parse($subadmin->created_at)->format('j F , Y') }}
+                                                <td> {{ date_time_format($subadmin->created_at) }}
                                                 </td>
-                                                <td> {{ \Carbon\Carbon::parse($subadmin->updated_at)->format('j F , Y') }}
+                                                <td>{{ date_time_format($subadmin->updated_at) }}
                                                 </td>
                                                 <td>
                                                     <div class="d-flex justify-content-center align-items-center">
@@ -99,15 +84,10 @@
                                                                 <i class="fa-solid fa-user-lock"></i>
                                                                 </button>
                                                         </a>
-
-
                                                     </div>
                                                 </td>
                                             </tr>
                                         @endforeach
-
-
-
                                         </tfoot>
                                 </table>
                             </div>

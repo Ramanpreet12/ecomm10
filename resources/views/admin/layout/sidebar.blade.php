@@ -134,6 +134,16 @@
                             </a>
                         </li>
 
+                        <li class="nav-item">
+                            <a href="{{ route('admin.family-colors.index') }}"
+                                class="nav-link  @if (Route::currentRouteName() == 'admin.family-colors.index') active @endif">
+                                <i class="nav-icon fa-solid fa-circle"></i>
+                                <p>Family Colors</p>
+                            </a>
+                        </li>
+
+
+
                     </ul>
                 </li>
 

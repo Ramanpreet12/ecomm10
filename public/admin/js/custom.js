@@ -162,4 +162,26 @@ $(document).ready(function () {
         });
     });
 
+       // update Products status
+       $(document).on("click", ".updateFamilyColorStatus", function () {
+        var status = $(this).find(".status").attr("family_colors_status");
+        var family_colors_id = $(this).attr('family_colors_id');
+
+        $.ajax({
+            type: 'post',
+            url: 'update-family-colors-status',
+            data: { status: status, family_colors_id: family_colors_id },
+            success: function (resp) {
+                if (resp['status'] == 1) {
+                    $('#family_colors-' + family_colors_id).html('<i class="fa-solid fa-toggle-on status"  data-toggle="tooltip" title="Active" style="color:#007bff"  family_colors_status="Active"></i>');
+                } else if (resp['status'] == 0) {
+                    $('#family_colors-' + family_colors_id).html('<i class="fa-solid fa-toggle-off status"  data-toggle="tooltip" title="Inactive" style="color:grey"  family_colors_status="Inactive"></i>');
+                }
+            }, error: function () {
+                console.log('error' + resp);
+            }
+        });
+    });
+
+
 });

@@ -205,21 +205,10 @@
                                             <select class="form-control" name="family_color" style="width: 100%;">
 
                                                 <option value="0"><b>select</b></option>
-                                                <option value="Red"  @if (old('family_color') === 'Red') selected @endif><b>Red</b></option>
-                                                <option value="Blue" @if (old('family_color') === 'Blue') selected @endif><b>Blue</b></option>
-                                                <option value="Green" @if (old('family_color') === 'Green') selected @endif><b>Green</b></option>
-                                                <option value="Yellow" @if (old('family_color') === 'Yellow') selected @endif><b>Yellow</b></option>
-                                                <option value="Black" @if (old('family_color') === 'Black') selected @endif><b>Black</b></option>
-                                                <option value="Brown" @if (old('family_color') === 'Brown') selected @endif><b>Brown</b></option>
-                                                <option value="White" @if (old('family_color') === 'White') selected @endif><b>White</b></option>
-                                                <option value="Pink" @if (old('family_color') === 'Pink') selected @endif><b>Pink</b></option>
-                                                <option value="Grey" @if (old('family_color') === 'Grey') selected @endif><b>Grey</b></option>
-                                                <option value="Golden" @if (old('family_color') === 'Golden') selected @endif><b>Golden</b></option>
-                                                <option value="Silver" @if (old('family_color') === 'Silver') selected @endif><b>Silver</b></option>
-                                                <option value="Orange" @if (old('family_color') === 'Orange') selected @endif><b>Orange</b></option>
+                                                @foreach ($family_colors as $family_color)
+                                                <option value="{{ $family_color->color_name }}" @if (old('family_color') === $family_color->color_name) selected @endif><b>{{ $family_color->color_name }}</b></option>
+                                                @endforeach
                                             </select>
-
-
                                             @error('family_color')
                                                 <span class="text-danger"> {{ $message }}</span>
                                             @enderror

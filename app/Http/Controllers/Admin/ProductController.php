@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\FamilyColor;
 use App\Http\Requests\ProductRequest;
 
 
@@ -41,8 +42,8 @@ class ProductController extends Controller
     {
         $getCategories = Category::getCategories();
         $productFilters = Product::productFilters();
-
-        return view('admin.products.create' , compact('getCategories' , 'productFilters'));
+        $family_colors = FamilyColor::get();
+        return view('admin.products.create' , compact('getCategories' , 'productFilters' , 'family_colors'));
     }
 
     /**
@@ -139,8 +140,9 @@ class ProductController extends Controller
         $getCategories = Category::getCategories();
         $product = Product::find($id);
         $productFilters = Product::productFilters();
+        $family_colors = FamilyColor::get();
 
-        return view('admin.products.edit' , compact('getCategories' , 'product', 'productFilters'));
+        return view('admin.products.edit' , compact('getCategories' , 'product', 'productFilters' , 'family_colors'));
     }
 
     /**

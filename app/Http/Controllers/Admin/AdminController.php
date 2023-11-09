@@ -106,20 +106,12 @@ class AdminController extends Controller
                 'name' => 'required',
                 'mobile' => 'required|numeric|digits:10'
             ];
-            // $customMessages = [
-            //     'current_pwd.required' => 'Current Password is required',
-            //     'new_password.required' => 'New Password is required'
-            // ];
+
             $this->validate($request , $rules );
             if($request->hasFile('image')){
-                $image = $request->file('image');
-                $image_name = $image->getClientOriginalName();
-                if (!is_dir(storage_path("app/public/images/admin_image"))) {
-                    mkdir(storage_path("app/public/images/admin_image"), 0775, true);
-                }
-                Image::make($image)->save(storage_path("app/public/images/admin_image/".$image_name));
-                $data['image']= $image_name;
+                $data['image']= store_image('image' ,'app/public/images/admin_image/' );
             }
+
 
             $data['name']= $request->name;
             $data['mobile'] = $request->mobile;
@@ -143,15 +135,20 @@ class AdminController extends Controller
     {
 
         $data = [];
+        // if($request->hasFile('image')){
+        //     $image = $request->file('image');
+        //     $image_name = $image->getClientOriginalName();
+        //     if (!is_dir(storage_path("app/public/images/admin_image"))) {
+        //         mkdir(storage_path("app/public/images/admin_image"), 0775, true);
+        //     }
+        //     Image::make($image)->save(storage_path("app/public/images/admin_image/".$image_name));
+        //     $data['image']= $image_name;
+        // }
+
         if($request->hasFile('image')){
-            $image = $request->file('image');
-            $image_name = $image->getClientOriginalName();
-            if (!is_dir(storage_path("app/public/images/admin_image"))) {
-                mkdir(storage_path("app/public/images/admin_image"), 0775, true);
-            }
-            Image::make($image)->save(storage_path("app/public/images/admin_image/".$image_name));
-            $data['image']= $image_name;
+            $data['image']= store_image('image' ,'app/public/images/admin_image/' );
         }
+
 
         $data['name'] = $request->name;
         $data['email'] = $request->email;
@@ -175,15 +172,8 @@ class AdminController extends Controller
 
         $data = [];
         if($request->hasFile('image')){
-            $image = $request->file('image');
-            $image_name = $image->getClientOriginalName();
-            if (!is_dir(storage_path("app/public/images/admin_image"))) {
-                mkdir(storage_path("app/public/images/admin_image"), 0775, true);
-            }
-            Image::make($image)->save(storage_path("app/public/images/admin_image/".$image_name));
-            $data['image']= $image_name;
+            $data['image']= store_image('image' ,'app/public/images/admin_image/' );
         }
-
         $data['name'] = $request->name;
         $data['email'] = $request->email;
         $data['password']= bcrypt($request->password);

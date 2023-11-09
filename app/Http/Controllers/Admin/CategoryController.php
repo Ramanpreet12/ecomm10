@@ -66,20 +66,26 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CategoryRequest $request)
+    // public function store(CategoryRequest $request)
+    public function store(Request $request)
     {
+        // dd($request);
 
         $data = [];
-        if($request->hasFile('category_image')){
-            $image = $request->file('category_image');
-            $image_name = $image->getClientOriginalName();
-            if (!is_dir(storage_path("app/public/front/images/category"))) {
-                mkdir(storage_path("app/public/front/images/category"), 0775, true);
-            }
-            Image::make($image)->save(storage_path("app/public/front/images/category/".$image_name));
-            $data['category_image']= $image_name;
-        }
+        // dd(store_image('category_image' ,'app/public/front/images/category/' ));
+        // if($request->hasFile('category_image')){
+        //     $image = $request->file('category_image');
+        //     $image_name = $image->getClientOriginalName();
+        //     if (!is_dir(storage_path("app/public/front/images/category"))) {
+        //         mkdir(storage_path("app/public/front/images/category"), 0775, true);
+        //     }
+        //     Image::make($image)->save(storage_path("app/public/front/images/category/".$image_name));
+        //     $data['category_image']= $image_name;
+        // }
 
+        if($request->hasFile('category_image')){
+            $data['category_image']= store_image('category_image' ,'app/public/front/images/category/' );
+        }
 
         $data['category_name'] = $request->category_name;
         $data['parent_id'] = $request->parent_id;
@@ -94,6 +100,7 @@ class CategoryController extends Controller
         $data['meta_title'] = $request->meta_title;
         $data['meta_keyword'] = $request->meta_keyword;
         $data['meta_description'] = $request->meta_description;
+        // $data['category_image']= store_image('category_image' ,'app/public/front/images/category/' );
         $data['status'] =1;
 
         Category::create($data);
@@ -125,13 +132,7 @@ class CategoryController extends Controller
     {
         $data = [];
         if($request->hasFile('category_image')){
-            $image = $request->file('category_image');
-            $image_name = $image->getClientOriginalName();
-            if (!is_dir(storage_path("app/public/front/images/category"))) {
-                mkdir(storage_path("app/public/front/images/category"), 0775, true);
-            }
-            Image::make($image)->save(storage_path("app/public/front/images/category/".$image_name));
-            $data['category_image']= $image_name;
+            $data['category_image']= store_image('category_image' ,'app/public/front/images/category/' );
         }
 
         $data['category_name'] = $request->category_name;
@@ -148,7 +149,6 @@ class CategoryController extends Controller
         $data['meta_keyword'] = $request->meta_keyword;
         $data['meta_description'] = $request->meta_description;
         $data['status'] =1;
-
         Category::whereId($id)->update($data);
         return redirect()->route('admin.categories.index')->with('success' , 'Category updated successfully');
     }
@@ -170,7 +170,6 @@ class CategoryController extends Controller
     public function deleteImage($id){
         // get image path
         $image_path = storage_path("app/public/front/images/category/");
-        // dd($image_path);
         //get image from table
         $get_image =  Category::whereId($id)->select('category_image')->first();
         $image =  $image_path.$get_image->category_image ;
@@ -178,7 +177,6 @@ class CategoryController extends Controller
         if (file_exists( $image )) {
             unlink( $image);
         }
-
         // delete from db
         Category::whereId($id)->update(['category_image'=> '']);
         return redirect()->back()->with('success' , 'Category Image deleted successfully');

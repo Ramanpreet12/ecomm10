@@ -21,15 +21,32 @@ class ProductRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'product_name' => 'required',
-            'category_id' => 'required',
-            'brand_id' => 'numeric',
-            'product_code' => 'required',
-            'product_price' => 'required|numeric',
-            'product_color' => 'required',
-            'family_color' => 'required',
-
-        ];
+        if(request()->isMethod('put')){
+            return [
+                'product_name' => 'required',
+                'category_id' => 'required',
+                'brand_id' => 'numeric',
+                'product_code' => 'required',
+                'product_price' => 'required|numeric',
+                'product_color' => 'required',
+                'family_color' => 'required',
+                'product_discount' => 'nullable|numeric',
+                
+            ];
+        }
+        else{
+            return [
+                'product_name' => 'required',
+                'category_id' => 'required',
+                'brand_id' => 'numeric',
+                'product_code' => 'required',
+                'product_price' => 'required|numeric',
+                'product_color' => 'required',
+                'family_color' => 'required',
+                'product_discount' => 'nullable|numeric',
+                'product_images' => 'required'
+            ];
+        }
+       
     }
 }

@@ -1,37 +1,11 @@
 @extends('admin.layout.layout')
 @section('content')
     <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1>Admins</h1>
-                    </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">subadmins</li>
-                        </ol>
-                    </div>
-                </div>
-            </div><!-- /.container-fluid -->
-        </section>
-
-        <!-- Main content -->
-        <section class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <!-- left column -->
-                    <div class="col-md-12 m-auto">
-
-                        <div class="card card-primary">
-                            <div class="card-header">
-                                <h3 class="card-title">Edit Subadmin</h3>
-                                <a class="float-right" href="{{ route('admin.subadmins.index') }}">
-                                    <button class="btn btn-primary">Back</button>
-                                </a>
-                            </div>
+        @include('admin.includes.page_header' , ['page_name' => 'Sub Admins' , 'breadcrumb_link' =>  route('admin.dashboard')  , 'breadcrumb_item' =>'sub-admins' ])
+        @include('admin.includes.page_main_content', [
+            'card_title' => 'Edit Subadmin',
+            'back_link' => route('admin.subadmins.index'),
+        ])
                             <form class="form-horizontal" action="{{ route('admin.subadmins.update', $subadmin->id) }}"
                                 method="POST" enctype="multipart/form-data">
                                 @csrf

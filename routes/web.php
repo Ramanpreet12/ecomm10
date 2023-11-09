@@ -58,6 +58,8 @@ Route::prefix('admin')->name('admin.')->namespace('App\Http\Controllers\Admin')-
         Route::get('product/delete/{id}' , 'ProductController@delete');
             // delete product video from folder and db
             Route::get('product-video/delete/{id}' , 'ProductController@deleteVideo');
+             // delete product image from folder and db
+            Route::get('product-image/delete/{id}' , 'ProductController@deleteImage');
 
 
             // products family colors
@@ -68,4 +70,12 @@ Route::prefix('admin')->name('admin.')->namespace('App\Http\Controllers\Admin')-
 
     });
 
+
+    
 });
+// Route::get('raman' , function(){
+//     return 'jkgkkfkf';
+// });
+
+
+// Route::redirect('raman' , 'preet');

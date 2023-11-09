@@ -1,7 +1,7 @@
 @extends('admin.layout.layout')
 @section('content')
     <div class="content-wrapper">
-@include('admin.includes.page_header' , ['page_name' => 'Admins' , 'breadcrumb_link' =>  route('admin.dashboard')  , 'breadcrumb_item' =>'admins' ])
+@include('admin.includes.page_header' , ['page_name' => 'Sub Admins' , 'breadcrumb_link' =>  route('admin.dashboard')  , 'breadcrumb_item' =>'sub-admins' ])
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">

@@ -34,13 +34,7 @@
 
                                 {{-- <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a> --}}
                             </div>
-                            <!-- /.card-body -->
                         </div>
-                        <!-- /.card -->
-
-                        <!-- About Me Box -->
-
-                        <!-- /.card -->
                     </div>
                     <!-- /.col -->
                     <div class="col-md-9">
@@ -51,8 +45,6 @@
                             </div><!-- /.card-header -->
                             <div class="card-body">
                                 {{-- <div class="tab-content"> --}}
-
-
                                 {{-- <div class="tab-pane" id="settings"> --}}
                                 <form id="adminDetailsForm" class="form-horizontal" action="{{ route('admin.admin-details') }}" method="POST"
                                     enctype="multipart/form-data">
@@ -112,9 +104,7 @@
                                     </div>
                                 </form>
                                 {{-- </div> --}}
-                                <!-- /.tab-pane -->
-                                {{-- </div> --}}
-                                <!-- /.tab-content -->
+
                             </div><!-- /.card-body -->
                         </div>
                         <!-- /.card -->

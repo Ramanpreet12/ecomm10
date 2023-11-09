@@ -27,33 +27,12 @@
 @endpush
 @section('content')
     <div class="content-wrapper">
-        <section class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1>Categories</h1>
-                    </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-                            <li class="breadcrumb-item active">Categories</li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card card-primary">
-                            <div class="card-header">
-                                <h3 class="card-title">Edit Category</h3>
-                                <a class="float-right" href="{{ route('admin.categories.index') }}">
-                                    <button class="btn btn-primary">Back</button>
-                                </a>
-                            </div>
-
+        @include('admin.includes.page_header' , ['page_name' => 'Categories' ,
+        'breadcrumb_link' =>  route('admin.dashboard')  , 'breadcrumb_item' =>'categories' ])
+     @include('admin.includes.page_main_content', [
+        'card_title' => 'Edit Category',
+        'back_link' => route('admin.categories.index'),
+    ])
                             <form action="{{ route('admin.categories.update', $category->id) }}" method="POST"
                                 enctype="multipart/form-data">
                                 @csrf
@@ -142,6 +121,7 @@
                                                 <div class="custom-file">
                                                     <input type="file" class="custom-file-input" id="category_image"
                                                         name="category_image">
+
                                                     <label class="custom-file-label" for="category_image">Choose
                                                         file</label>
                                                 </div>
@@ -149,6 +129,7 @@
                                                     <span class="input-group-text">Upload</span>
                                                 </div>
                                             </div>
+
                                         </div>
                                         <div class="form-group col-6">
                                             <label for="description">Description</label>

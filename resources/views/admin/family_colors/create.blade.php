@@ -9,13 +9,14 @@
                                 'back_link' => route('admin.family-colors.index'),
                             ])
 
+{{-- <x-forms.text-input  /> --}}
 
-                            <!-- /.card-header -->
-                            <!-- form start -->
-                            <form action="{{ route('admin.family-colors.store') }}" method="POST" enctype="multipart/form-data">
+                            {{-- <form action="{{ route('admin.family-colors.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="card-body">
+
                                     <div class="row">
+                                        <x-forms.text-input label="Color Name" type="text" name="color_name" placeholder="Enter color name" />
                                         <div class="form-group col-6">
                                             <label for="color_name">Color Name</label>
                                             <input type="text" class="form-control" id="color_name" name="color_name"
@@ -27,36 +28,22 @@
                                                 placeholder="#000000" value="{{ old('color_code') }}">
                                         </div>
                                     </div>
-
                                     <div class="row">
                                         <div class="form-group col-6">
-                                            {{-- <label for="status">Status</label> --}}
                                             <input type="hidden" class="form-control" id="status" name="status"
                                                 placeholder="Enter color name" value="1">
                                         </div>
-
                                     </div>
-
-
-                                    <!-- /.card-body -->
-
                                     <div class="card-footer">
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                     </div>
-                            </form>
+                            </form> --}}
+
+                            @include('admin.includes.form' , [ 'action' =>  route('admin.family-colors.store')  ,  'method' => 'POST' , 'button_name' => 'Submit'])
                         </div>
-                        <!-- /.card -->
-
-
                     </div>
-                    <!--/.col (left) -->
-                    <!-- right column -->
-
-                    <!--/.col (right) -->
                 </div>
-                <!-- /.row -->
-            </div><!-- /.container-fluid -->
+            </div>
         </section>
-        <!-- /.content -->
     </div>
 @endsection

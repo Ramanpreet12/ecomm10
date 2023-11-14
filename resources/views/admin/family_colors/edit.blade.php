@@ -11,9 +11,8 @@
             'card_title' => 'Edit Family Color',
             'back_link' => route('admin.family-colors.index'),
         ])
-        <!-- /.card-header -->
-        <!-- form start -->
-        <form action="{{ route('admin.family-colors.update', $family_color->id) }}" method="POST"
+
+        {{-- <form action="{{ route('admin.family-colors.update', $family_color->id) }}" method="POST"
             enctype="multipart/form-data">
             @csrf
             @method('PUT')
@@ -30,22 +29,13 @@
                             value="{{ old('color_code', $family_color->color_code) }}">
                     </div>
                 </div>
-
-                {{-- <div class="row">
-                                        <div class="form-group col-6">
-                                            <label for="status">Status</label>
-                                            <input type="hidden" class="form-control" id="status" name="status"
-                                                placeholder="Enter color name" value="{{ $family_color->status }}">
-                                        </div>
-                                    </div> --}}
-
-
-                <!-- /.card-body -->
-
                 <div class="card-footer">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
-        </form>
+        </form> --}}
+
+        @include('admin.includes.form' , ['action' => route('admin.family-colors.update', $family_color->id) , 'method' => 'PUT' , 'button_name' => 'Update'])
+
     </div>
     </div>
     </div>

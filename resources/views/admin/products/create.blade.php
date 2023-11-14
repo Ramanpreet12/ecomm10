@@ -14,6 +14,7 @@
         <form action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="card-body">
+
                 <div class="row">
                     <div class="form-group col-6">
                         <label for="product_name">Product Name</label>

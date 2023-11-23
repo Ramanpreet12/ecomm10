@@ -11,22 +11,23 @@
 
 {{-- <x-forms.text-input  /> --}}
 
-                            {{-- <form action="{{ route('admin.family-colors.store') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('admin.family-colors.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="card-body">
 
                                     <div class="row">
                                         <x-forms.text-input label="Color Name" type="text" name="color_name" placeholder="Enter color name" />
-                                        <div class="form-group col-6">
+                                        <x-forms.text-input label="Color Code" type="text" name="color_code" placeholder="Enter color code" />
+                                        {{-- <div class="form-group col-6">
                                             <label for="color_name">Color Name</label>
                                             <input type="text" class="form-control" id="color_name" name="color_name"
                                                 placeholder="Enter color name" value="{{ old('color_name') }}">
-                                        </div>
-                                        <div class="form-group col-6">
+                                        </div> --}}
+                                        {{-- <div class="form-group col-6">
                                             <label for="color_code">Color Code</label>
                                             <input type="text" class="form-control" id="color_code" name="color_code"
                                                 placeholder="#000000" value="{{ old('color_code') }}">
-                                        </div>
+                                        </div> --}}
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-6">
@@ -37,9 +38,9 @@
                                     <div class="card-footer">
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                     </div>
-                            </form> --}}
+                            </form>
 
-                            @include('admin.includes.form' , [ 'action' =>  route('admin.family-colors.store')  ,  'method' => 'POST' , 'button_name' => 'Submit'])
+                            {{-- @include('admin.includes.form' , [ 'action' =>  route('admin.family-colors.store')  ,  'method' => 'POST' , 'button_name' => 'Submit']) --}}
                         </div>
                     </div>
                 </div>

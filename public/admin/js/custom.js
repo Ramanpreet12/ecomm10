@@ -184,4 +184,31 @@ $(document).ready(function () {
     });
 
 
+
+    // add remove fields dynamiclly
+
+    var maxField = 10; //Input fields increment limitation
+    var addButton = $('.add_button'); //Add button selector
+    var wrapper = $('.field_wrapper'); //Input field wrapper
+    var fieldHTML = '<div  class="d-flex form-group col-12"><input type="text"  class="form-control mr-2" name="size[]" placeholder="Enter size" id="size" style="width: 120px" value=""/><input type="text"  class="form-control mr-2" name="sku[]" placeholder="Enter SKU" id="sku" style="width: 120px" value=""/> <input type="text"  class="form-control mr-2" name="price[]" placeholder="Enter price" id="price" style="width: 120px" value=""/> <input type="text"  class="form-control mr-2" name="stock[]" placeholder="Enter stock" id="stock" style="width: 120px" value=""/> <a href="javascript:void(0);" class="remove_button  mt-2"> <span class = "text-danger"> <i class="fa-solid fa-circle-minus"></i></span></a></div>'; //New input field html
+    var x = 1; //Initial field counter is 1
+
+    // Once add button is clicked
+    $(addButton).click(function(){
+        //Check maximum number of input fields
+        if(x < maxField){
+            x++; //Increase field counter
+            $(wrapper).append(fieldHTML); //Add field html
+        }else{
+            alert('A maximum of '+maxField+' fields are allowed to be added. ');
+        }
+    });
+
+    // Once remove button is clicked
+    $(wrapper).on('click', '.remove_button', function(e){
+        e.preventDefault();
+        $(this).parent('div').remove(); //Remove field html
+        x--; //Decrease field counter
+    });
+
 });

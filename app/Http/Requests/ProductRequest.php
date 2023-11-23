@@ -28,10 +28,10 @@ class ProductRequest extends FormRequest
                 'brand_id' => 'numeric',
                 'product_code' => 'required',
                 'product_price' => 'required|numeric',
-                'product_color' => 'required',
-                'family_color' => 'required',
+                // 'product_color' => 'required',
+                // 'family_color' => 'required',
                 'product_discount' => 'nullable|numeric',
-                
+
             ];
         }
         else{
@@ -41,12 +41,12 @@ class ProductRequest extends FormRequest
                 'brand_id' => 'numeric',
                 'product_code' => 'required',
                 'product_price' => 'required|numeric',
-                'product_color' => 'required',
-                'family_color' => 'required',
+                // 'product_color' => 'required',
+                // 'family_color' => 'required',
                 'product_discount' => 'nullable|numeric',
-                'product_images' => 'required'
+                // 'product_images' => 'required'
             ];
         }
-       
+
     }
 }

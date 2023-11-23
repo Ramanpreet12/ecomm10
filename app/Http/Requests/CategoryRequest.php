@@ -33,6 +33,7 @@ class CategoryRequest extends FormRequest
 
         return [
             'category_name' => 'required',
+            'parent_id' => 'required',
             'category_image' => 'nullable',
             'category_discount' => 'numeric',
             'url' => 'required|unique:categories,url',

@@ -12,7 +12,7 @@
             'back_link' => route('admin.family-colors.index'),
         ])
 
-        {{-- <form action="{{ route('admin.family-colors.update', $family_color->id) }}" method="POST"
+         <form action="{{ route('admin.family-colors.update', $family_color->id) }}" method="POST"
             enctype="multipart/form-data">
             @csrf
             @method('PUT')
@@ -32,9 +32,9 @@
                 <div class="card-footer">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
-        </form> --}}
+        </form>
 
-        @include('admin.includes.form' , ['action' => route('admin.family-colors.update', $family_color->id) , 'method' => 'PUT' , 'button_name' => 'Update'])
+        {{-- @include('admin.includes.update-form' , ['action' => route('admin.family-colors.update', $family_color->id) , 'method' => 'PUT' , 'button_name' => 'Update' , 'data' => $family_color]) --}}
 
     </div>
     </div>

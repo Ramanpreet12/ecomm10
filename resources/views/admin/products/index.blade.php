@@ -103,6 +103,15 @@
                                                                 module_id={{ $product->id }}><i
                                                                     class="fa-solid fa-trash-can"></i></button>
                                                         </a>
+
+                                                        <a href="{{ route('admin.product-details', $product->id) }}"
+                                                            data-toggle="tooltip" title="Add more product details">
+                                                            <button class="btn btn-warning ml-2">
+                                                                <i class="fa-solid fa-plus"></i>
+                                                            </button>
+                                                        </a>
+
+
                                                     {{-- @endif --}}
                                                 </div>
                                             </td>

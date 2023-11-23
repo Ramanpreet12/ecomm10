@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\CmsPageController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\FamilyColorController;
+use App\Http\Controllers\Admin\ProductDetailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,10 +57,12 @@ Route::prefix('admin')->name('admin.')->namespace('App\Http\Controllers\Admin')-
         Route::resource('products', ProductController::class);
         Route::post('update-product-status' , 'ProductController@updateProductStatus')->name('update-product-status');
         Route::get('product/delete/{id}' , 'ProductController@delete');
-            // delete product video from folder and db
-            Route::get('product-video/delete/{id}' , 'ProductController@deleteVideo');
-             // delete product image from folder and db
-            Route::get('product-image/delete/{id}' , 'ProductController@deleteImage');
+        // delete product video from folder and db
+        Route::get('product-video/delete/{id}' , 'ProductController@deleteVideo');
+        // delete product image from folder and db
+        Route::get('product-image/delete/{id}' , 'ProductController@deleteImage');
+        Route::get('product-details/{id}' , 'ProductDetailController@productDetails')->name('product-details');
+        Route::post('add-products-details/{id}' , 'ProductDetailController@addProductDetails')->name('add-products-details');
 
 
             // products family colors
@@ -71,7 +74,7 @@ Route::prefix('admin')->name('admin.')->namespace('App\Http\Controllers\Admin')-
     });
 
 
-    
+
 });
 // Route::get('raman' , function(){
 //     return 'jkgkkfkf';

@@ -45,27 +45,29 @@ class ProductController extends Controller
     public function create()
     {
         $getCategories = Category::getCategories();
-        $productFilters = Product::productFilters();
-        $family_colors = FamilyColor::get();
-        return view('admin.products.create' , compact('getCategories' , 'productFilters' , 'family_colors'));
+        // $productFilters = Product::productFilters();
+        // $family_colors = FamilyColor::get();
+        // return view('admin.products.create' , compact('getCategories' , 'productFilters' , 'family_colors'));
+        return view('admin.products.create' , compact('getCategories'));
     }
 
     public function store(ProductRequest $request)
     {
+
         $calculate_actual_price =Product::calculate_actual_price($request->product_discount ,$request->product_price , $request->category_id);
         // uploading video
-        if ($request->hasFile('product_video')) {
-            $product_video = $request->file('product_video');
-           if ($product_video) {
-            $video_name = 'product-'.rand(1111, 9999).'-'.$product_video->getClientOriginalName();
-            //  $video_path = 'public/front/videos/products/';
-            $product_video->storeAs($this->product_video_path.$video_name);
-            // $product_video->storeAs($this->product_video_path.$video_name);
-           }
-        }
-        else{
-            $video_name ='';
-        }
+        // if ($request->hasFile('product_video')) {
+        //     $product_video = $request->file('product_video');
+        //    if ($product_video) {
+        //     $video_name = 'product-'.rand(1111, 9999).'-'.$product_video->getClientOriginalName();
+        //     //  $video_path = 'public/front/videos/products/';
+        //     $product_video->storeAs($this->product_video_path.$video_name);
+        //     // $product_video->storeAs($this->product_video_path.$video_name);
+        //    }
+        // }
+        // else{
+        //     $video_name ='';
+        // }
 
        $product =  Product::create([
             'product_name' => $request->product_name,
@@ -77,18 +79,18 @@ class ProductController extends Controller
             'discount_type' =>$calculate_actual_price['product_discount_type'],
             'final_price' => $calculate_actual_price['final_price'],
             'product_description' => $request->product_description,
-            'product_video' => $video_name,
-            'product_weight' => $request->product_weight,
-            'product_color' => $request->product_color,
-            'family_color' => $request->family_color,
+            // 'product_video' => $video_name,
+            // 'product_weight' => $request->product_weight,
+            // 'product_color' => $request->product_color,
+            // 'family_color' => $request->family_color,
             'group_code' => $request->group_code,
-            'wash_care' => $request->wash_care,
-            'search_keywords' => $request->search_keywords,
-            'fabric' => $request->fabric,
-            'pattern' => $request->pattern,
-            'sleeve' => $request->sleeve,
-            'fit' => $request->fit,
-            'occassion' => $request->occassion,
+            // 'wash_care' => $request->wash_care,
+            // 'search_keywords' => $request->search_keywords,
+            // 'fabric' => $request->fabric,
+            // 'pattern' => $request->pattern,
+            // 'sleeve' => $request->sleeve,
+            // 'fit' => $request->fit,
+            // 'occassion' => $request->occassion,
             'meta_title' => $request->meta_title,
             'meta_keyword' => $request->meta_keyword,
             'meta_description' => $request->meta_description,
@@ -126,11 +128,11 @@ class ProductController extends Controller
                 ]);
             }
         }
-        if ($create_product_image->id > 0  ) {
+        // if ($create_product_image->id > 0  ) {
             return redirect()->route('admin.products.index')->with('success' , 'Product added successfully');
-        } else {
-            return redirect()->back()->with('error' , 'Something went wrong !');
-        }
+        // } else {
+        //     return redirect()->back()->with('error' , 'Something went wrong !');
+        // }
     }
 
     public function edit(string $id)

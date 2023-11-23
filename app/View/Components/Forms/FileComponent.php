@@ -6,19 +6,17 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class CreateComponent extends Component
+class FileComponent extends Component
 {
     /**
      * Create a new component instance.
      */
-    public $label , $type , $name , $placeholder;
+    public $label , $name ;
 
-    public function __construct($label ,  $type , $name ,$placeholder )
+    public function __construct($label , $name )
     {
         $this->label = $label;
-        $this->type = $type;
         $this->name = $name;
-        $this->placeholder = $placeholder;
     }
 
     /**
@@ -26,6 +24,6 @@ class CreateComponent extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.forms.create-component');
+        return view('components.forms.file-component');
     }
 }

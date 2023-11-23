@@ -1,5 +1,9 @@
 @extends('admin.layout.layout')
 @section('content')
+{{-- @php
+    ini_set('max_execution_time', 500 ) ;
+@endphp --}}
+
     <div class="content-wrapper">
         @include('admin.includes.page_header', [
             'page_name' => 'Products',
@@ -16,15 +20,8 @@
             <div class="card-body">
 
                 <div class="row">
-                    <div class="form-group col-6">
-                        <label for="product_name">Product Name</label>
-                        <input type="text" class="form-control" id="product_name" name="product_name"
-                            placeholder="Enter product name" value="{{ old('product_name') }}">
-                        @error('product_name')
-                            <span class="text-danger"> {{ $message }}</span>
-                        @enderror
-                    </div>
-
+                    <x-forms.text-input label="Product Name" type="text" name="product_name"
+                        placeholder="Enter product name" />
                     <div class="form-group col-6">
                         <label for="category_id">Select Category Level</label>
                         <select class="form-control" name="category_id" style="width: 100%;">
@@ -72,234 +69,100 @@
                         </select>
                     </div>
                 </div>
-
                 <div class="row">
-                    <div class="form-group col-6">
-                        <label for="brand_id">Brand</label>
-                        <input type="number" class="form-control" id="brand_id" name="brand_id"
-                            placeholder="Enter brand name" value="{{ old('brand_id') }}">
-                        @error('brand_id')
-                            <span class="text-danger"> {{ $message }}</span>
-                        @enderror
-                    </div>
-                    <div class="form-group col-6">
-                        <label for="product_code">Product Code</label>
-                        <input type="text" class="form-control" id="product_code" name="product_code"
-                            placeholder="Enter product code" value="{{ old('product_code') }}">
-                        @error('product_code')
-                            <span class="text-danger"> {{ $message }}</span>
-                        @enderror
-                    </div>
+                    <x-forms.text-input label="Brand" type="number" name="brand_id" placeholder="Enter brand name" />
+                    <x-forms.text-input label="Product Code" type="text" name="product_code"
+                        placeholder="Enter product code" />
+                </div>
+                <div class="row">
+                    <x-forms.text-input label="Product Price" type="number" name="product_price"
+                        placeholder="Enter product price" />
+                    <x-forms.text-input label="Product Discount" type="number" name="product_discount"
+                        placeholder="Enter product discount" />
+                </div>
+                <div class="row">
+                    <x-forms.textarea-component label="Product Description" name="product_description"
+                        placeholder="Enter description" />
+                        <x-forms.text-input label="Group Code" type="text" name="group_code"
+                        placeholder="Enter group code" />
                 </div>
 
                 <div class="row">
-                    <div class="form-group col-6">
-                        <label for="product_price">Product Price</label>
-                        <input type="number" class="form-control" id="product_price" name="product_price"
-                            placeholder="Enter product price" value="{{ old('product_price') }}">
-                        @error('product_price')
-                            <span class="text-danger"> {{ $message }}</span>
-                        @enderror
-                    </div>
-                    <div class="form-group col-6">
-                        <label for="product_discount">Product Discount</label>
-                        <input type="number" class="form-control" id="product_discount" name="product_discount"
-                            placeholder="Enter product discount" value="{{ old('product_discount') }}">
-                        @error('product_discount')
-                            <span class="text-danger"> {{ $message }}</span>
-                        @enderror
-                    </div>
+                    {{-- <x-forms.text-input label="Product Weight" type="text" name="product_weight"
+                        placeholder="Enter product weight" /> --}}
+                    {{-- <x-forms.text-input label="Product Color" type="text" name="product_color"
+                        placeholder="Enter product color" /> --}}
                 </div>
-
-
-                {{-- will be added during post the data not here --}}
-                {{-- <div class="row">
-                                        <div class="form-group col-6">
-                                            <label for="discount_type">Discount Type</label>
-                                            <input type="text" class="form-control" id="discount_type" name="discount_type"
-                                                placeholder="Enter discount type" value="{{ old('discount_type') }}">
-                                            @error('discount_type')
-                                                <span class="text-danger"> {{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group col-6">
-                                            <label for="final_price">Final Price</label>
-                                            <input type="text" class="form-control" id="final_price"
-                                                name="final_price" placeholder="Enter final price"
-                                                value="{{ old('final_price') }}">
-                                                @error('final_price')
-                                                <span class="text-danger"> {{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                    </div> --}}
                 <div class="row">
-                    <div class="form-group col-6">
-                        <label for="product_description">Product Description</label>
-                        <textarea class="form-control" id="" cols="2" rows="2" name="product_description"
-                            placeholder="Enter product description">{{ old('product_description') }}</textarea>
-                        @error('product_description')
-                            <span class="text-danger"> {{ $message }}</span>
-                        @enderror
-                    </div>
                     {{-- <div class="form-group col-6">
-                        <label for="product_video">Product Video</label>
-                        <input type="file" class="form-control" id="product_video" name="product_video"
-                            placeholder="Enter product Video" value="{{ old('product_video') }}">
-                        @error('product_video')
-                            <span class="text-danger"> {{ $message }}</span>
-                        @enderror
-                    </div> --}}
-                </div>
-
-                <div class="row">
-                    <div class="form-group col-6">
-                        <label for="product_weight">Product Weight</label>
-                        <input type="text" class="form-control" id="product_weight" name="product_weight"
-                            placeholder="Enter product weight" value="{{ old('product_weight') }}">
-
-                        @error('product_weight')
-                            <span class="text-danger"> {{ $message }}</span>
-                        @enderror
-                    </div>
-                    <div class="form-group col-6">
-                        <label for="product_color">Product Color</label>
-                        <input type="text" class="form-control" id="product_color" name="product_color"
-                            placeholder="Enter product color" value="{{ old('product_color') }}">
-                        @error('product_color')
-                            <span class="text-danger"> {{ $message }}</span>
-                        @enderror
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-6">
                         <label for="family_color">Product Family Color</label>
-                        {{-- <input type="text" class="form-control" id="family_color"
-                                            name="family_color" placeholder="Enter product family color"
-                                            value="{{ old('family_color') }}"> --}}
-
                         <select class="form-control" name="family_color" style="width: 100%;">
 
                             <option value="0"><b>select</b></option>
                             @foreach ($family_colors as $family_color)
                                 <option value="{{ $family_color->color_name }}"
                                     @if (old('family_color') === $family_color->color_name) selected @endif>
-                                    <b>{{ $family_color->color_name }}</b></option>
+                                    <b>{{ $family_color->color_name }}</b>
+                                </option>
                             @endforeach
                         </select>
                         @error('family_color')
                             <span class="text-danger"> {{ $message }}</span>
                         @enderror
-                    </div>
-                    <div class="form-group col-6">
-                        <label for="group_code">Group Code</label>
-                        <input type="text" class="form-control" id="group_code" name="group_code"
-                            placeholder="Enter group code" value="{{ old('group_code') }}">
-                        @error('group_code')
-                            <span class="text-danger"> {{ $message }}</span>
-                        @enderror
-                    </div>
+                    </div> --}}
+                    {{-- <x-forms.text-input label="Group Code" type="text" name="group_code"
+                        placeholder="Enter group code" /> --}}
+                        {{-- <div class="form-group col-6">
+                            <label for="is_featured">Is Featured</label>
+                            <div class="form-check">
+                                <input type="checkbox" value="Yes" class="form-check-input" id="exampleCheck1"
+                                    name="is_featured" @if (old('is_featured')) checked @endif>
+                            </div>
+                            @error('is_featured')
+                                <span class="text-danger"> {{ $message }}</span>
+                            @enderror
+                        </div> --}}
                 </div>
 
+                {{-- <div class="row">
+
+                    <x-forms.text-input label="Wash Care" type="text" name="wash_care" placeholder="Enter wash care" />
+                    <x-forms.text-input label="Search Keyword" type="text" name="search_keywords"
+                        placeholder="Enter product search keywords" />
+                </div> --}}
+
+                {{-- <div class="row">
+                    @include('admin.includes.form-select', [
+                        'label' => 'Fabric',
+                        'name' => 'fabric',
+                        'collection' => $productFilters['fabrics'],
+                    ])
+                    @include('admin.includes.form-select', [
+                        'label' => 'Pattern',
+                        'name' => 'pattern',
+                        'collection' => $productFilters['patterns'],
+                    ])
+                </div> --}}
+
+                {{-- <div class="row">
+                    @include('admin.includes.form-select', [
+                        'label' => 'Sleeve',
+                        'name' => 'sleeve',
+                        'collection' => $productFilters['sleeves'],
+                    ])
+                    @include('admin.includes.form-select', [
+                        'label' => 'Fit',
+                        'name' => 'fit',
+                        'collection' => $productFilters['fits'],
+                    ])
+                </div> --}}
                 <div class="row">
-                    <div class="form-group col-6">
-                        <label for="wash_care">Wash Care</label>
-                        <input type="text" class="form-control" id="wash_care" name="wash_care"
-                            placeholder="Enter wash care " value="{{ old('wash_care') }}">
-
-                        @error('wash_care')
-                            <span class="text-danger"> {{ $message }}</span>
-                        @enderror
-                    </div>
-                    <div class="form-group col-6">
-                        <label for="search_keywords">Search Keyword</label>
-                        <input type="text" class="form-control" id="search_keywords" name="search_keywords"
-                            placeholder="Enter product search keywords" value="{{ old('search_keywords') }}">
-                        @error('search_keywords')
-                            <span class="text-danger"> {{ $message }}</span>
-                        @enderror
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="form-group col-6">
-                        <label for="fabric">Fabric</label>
-                        <select class="form-control" id="fabric" name="fabric">
-                            <option value="">select</option>
-                            @foreach ($productFilters['fabrics'] as $fabric)
-                                <option value="{{ $fabric }}" @if (old('fabric') === $fabric) selected @endif>
-                                    {{ $fabric }}</option>
-                            @endforeach
-                        </select>
-                        @error('fabric')
-                            <span class="text-danger"> {{ $message }}</span>
-                        @enderror
-                    </div>
-
-                    <div class="form-group col-6">
-                        <label for="pattern">Pattern</label>
-                        <select class="form-control" id="pattern" name="pattern">
-                            <option value="">select</option>
-                            @foreach ($productFilters['patterns'] as $pattern)
-                                <option value="{{ $pattern }}" @if (old('pattern') === $pattern) selected @endif>
-                                    {{ $pattern }}</option>
-                            @endforeach
-                        </select>
-
-                        @error('pattern')
-                            <span class="text-danger"> {{ $message }}</span>
-                        @enderror
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="form-group col-6">
-                        <label for="sleeve">Sleeve</label>
-                        <select class="form-control" id="sleeve" name="sleeve">
-                            <option value="">select</option>
-                            @foreach ($productFilters['sleeves'] as $sleeve)
-                                <option value="{{ $sleeve }}" @if (old('sleeve') === $sleeve) selected @endif>
-                                    {{ $sleeve }}</option>
-                            @endforeach
-                        </select>
-
-
-                        @error('sleeve')
-                            <span class="text-danger"> {{ $message }}</span>
-                        @enderror
-                    </div>
-                    <div class="form-group col-6">
-                        <label for="fit">Fit</label>
-
-
-                        <select class="form-control" id="fit" name="fit">
-                            <option value="">select</option>
-                            @foreach ($productFilters['fits'] as $fit)
-                                <option value="{{ $fit }}" @if (old('fit') === $fit) selected @endif>
-                                    {{ $fit }}</option>
-                            @endforeach
-                        </select>
-
-                        @error('fit')
-                            <span class="text-danger"> {{ $message }}</span>
-                        @enderror
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="form-group col-6">
-                        <label for="occassion">Occassion</label>
-                        <select class="form-control" id="occassion" name="occassion">
-                            <option value="">select</option>
-                            @foreach ($productFilters['occassions'] as $occassion)
-                                <option value="{{ $occassion }}" @if (old('occassion') === $occassion) selected @endif>
-                                    {{ $occassion }}</option>
-                            @endforeach
-                        </select>
-                        @error('occassion')
-                            <span class="text-danger"> {{ $message }}</span>
-                        @enderror
-                    </div>
-                    <div class="form-group col-6">
+                    {{-- @include('admin.includes.form-select', [
+                        'label' => 'Occassion',
+                        'name' => 'occassion',
+                        'collection' => $productFilters['occassions'],
+                    ]) --}}
+                    {{-- <div class="form-group col-6">
                         <label for="is_featured">Is Featured</label>
                         <div class="form-check">
                             <input type="checkbox" value="Yes" class="form-check-input" id="exampleCheck1"
@@ -308,7 +171,7 @@
                         @error('is_featured')
                             <span class="text-danger"> {{ $message }}</span>
                         @enderror
-                    </div>
+                    </div> --}}
                 </div>
 
                 <div class="row">
@@ -321,81 +184,57 @@
                     </div>
 
                     <div class="form-group col-6">
-                        <label for="product_video">Product Video</label>
-                        <input type="file" class="form-control" id="product_video" name="product_video">
-                        @error('product_video')
+                        <label for="is_featured">Is Featured</label>
+                        <div class="form-check">
+                            <input type="checkbox" value="Yes" class="form-check-input" id="exampleCheck1"
+                                name="is_featured" @if (old('is_featured')) checked @endif>
+                        </div>
+                        @error('is_featured')
                             <span class="text-danger"> {{ $message }}</span>
                         @enderror
                     </div>
+
+                    {{-- <x-forms.file-component label="Product Video" name="product_video" /> --}}
                 </div>
-
-
 
                 {{-- <div class="row">
-                                        <div class="form-group col-6">
-                                            <label for="category_image">Category Image</label>
-                                            <div     class="input-group">
-                                                <div class="custom-file">
-                                                    <input type="file" class="custom-file-input" id="category_image"
-                                                        name="category_image">
-                                                    <label class="custom-file-label" for="category_image">Choose
-                                                        file</label>
-                                                </div>
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text">Upload</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-6">
-                                            <label for="description">Description</label>
-                                            <textarea class="form-control" name="description" rows="3" placeholder="Enter Description"
-                                                value="{{ old('description') }}"></textarea>
-                                        </div>
-
-                                    </div> --}}
-
+                    <div class="field_wrapper">
+                        <div class="form-group col-12">
+                            <label for="product_images">Product Attributes</label>
+                            <div class="d-flex">
+                                <input type="text" class="form-control mr-2" name="size[]" placeholder="Enter size"
+                                    id="size" style="width: 120px" value="" />
+                                <input type="text" class="form-control mr-2" name="sku[]" placeholder="Enter SKU"
+                                    id="sku" style="width: 120px" value="" />
+                                <input type="text" class="form-control mr-2" name="price[]" placeholder="Enter price"
+                                    id="price" style="width: 120px" value="" />
+                                <input type="text" class="form-control mr-2" name="stock[]" placeholder="Enter stock"
+                                    id="stock" style="width: 120px" value="" />
+                                <a href="javascript:void(0);" class="add_button mt-2" title="Add field">
+                                    <span class="text-primary"><i class="fa-solid fa-circle-plus"></i></span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div> --}}
                 <hr>
                 <div class="row mt-4">
-
-                    <div class="form-group col-6">
-                        <label for="meta_title">Meta Title</label>
-                        <input type="text" class="form-control" id="meta_title" name="meta_title"
-                            placeholder="Enter meta title" value="{{ old('meta_title') }}">
-                    </div>
-                    <div class="form-group col-6">
-                        <label for="meta_keyword">Meta Keyword</label>
-                        <input type="text" class="form-control" id="meta_keyword" name="meta_keyword"
-                            placeholder="Enter meta keyword" value="{{ old('meta_keyword') }}">
-                    </div>
-
+                    <x-forms.text-input label="Meta title" type="text" name="meta_title"
+                        placeholder="Enter meta title" />
+                    <x-forms.text-input label="Meta Keyword" type="text" name="meta_keyword"
+                        placeholder="Enter meta keyword" />
                 </div>
-
                 <div class="row">
-                    <div class="form-group col-6">
-                        <label for="meta_description">Meta Description</label>
-                        <textarea class="form-control" name="meta_description" rows="3" placeholder="Enter meta description">{{ old('meta_description') }}</textarea>
-                    </div>
+                    <x-forms.textarea-component label="Meta Description" name="meta_description"
+                        placeholder="Enter meta description" />
                 </div>
-
-                <!-- /.card-body -->
-
                 <div class="card-footer">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
         </form>
     </div>
-    <!-- /.card -->
-
-
     </div>
-    <!--/.col (left) -->
-    <!-- right column -->
-
-    <!--/.col (right) -->
     </div>
-    <!-- /.row -->
-    </div><!-- /.container-fluid -->
+    </div>
     </section>
-    <!-- /.content -->
     </div>
 @endsection
